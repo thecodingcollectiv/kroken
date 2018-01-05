@@ -1,4 +1,4 @@
-pragma solidity ^0.4.20;
+pragma solidity ^0.4.19;
 
 contract WorkOrder {
 	address public creator;
@@ -9,7 +9,7 @@ contract WorkOrder {
 	
 	modifier onlyBy(address _account) { require(msg.sender == _account); _;	}
 	modifier notCompleted() { require(!completed); _; }
-	modified hasWorker() { require(worker != address(0)); _; }
+	modifier hasWorker() { require(worker != address(0)); _; }
 	
 	event workerPaidOut(uint amount, uint completedTime);
 	event workorderCanceled(uint amount, uint canceledTime);
