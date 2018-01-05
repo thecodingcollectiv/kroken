@@ -10,4 +10,8 @@ contract WorkOrder {
 		require(msg.sender == _account);
 		_;
 	}
+	
+	function cancel() public onlyBy(creator) {
+		//transfer the money in this workorder back to the creator.
+	}	
 }
