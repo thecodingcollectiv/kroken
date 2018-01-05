@@ -11,14 +11,18 @@ contract WorkOrder {
 		require(msg.sender == _account);
 		_;
 	}
-	
+
+	modifier notCompleted() {
+		require(!completed);
+	}
+
 	function WorkOrder() public payable {
 		amount = msg.value;
 		creator = msg.sender;
 		creationTime = now;
 	}
-		
-	function cancel() public onlyBy(creator) {
+	
+	function cancel() public onlyBy(creator) notCompleted {
 		completed = true;
 		creator.transfer(amount);
 	}	
