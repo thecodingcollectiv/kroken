@@ -28,7 +28,7 @@ contract WorkOrder {
 	
 	function payoutWorker() public onlyBy(creator) notCompleted hasWorker {
 		completed = true;
-		workorderPaidOut(amount, now);
+		workerPaidOut(amount, now);
 		worker.transfer(amount);
 	}
 	
