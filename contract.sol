@@ -1,8 +1,9 @@
 pragma solidity ^0.4.19;
 
 contract WorkOrder {
-	address public creator = new msg.sender;
-	uint public creationTime = now;
+	address public creator;
+	uint public creationTime;
+	uint public amount;
 	bool completed = false;
 	
 	modifier onlyBy(address _account)
@@ -11,7 +12,14 @@ contract WorkOrder {
 		_;
 	}
 	
+	function WorkOrder() public payable {
+		amount = msg.value;
+		creator = msg.sender;
+		creationTime = now;
+	}
+		
 	function cancel() public onlyBy(creator) {
-		//transfer the money in this workorder back to the creator.
+		completed = true;
+		creator.transfer(amount);
 	}	
 }
