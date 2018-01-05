@@ -21,6 +21,11 @@ contract WorkOrder {
 		worker = workeraccount;
 	}
 	
+	function payoutWorker() public onlyBy(creator) notCompleted hasWorker {
+		completed = true;
+		worker.transfer(amount);
+	}
+	
 	function cancel() public onlyBy(creator) notCompleted {
 		completed = true;
 		creator.transfer(amount);
