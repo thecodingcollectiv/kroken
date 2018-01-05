@@ -11,7 +11,7 @@ contract WorkOrder {
 	modifier notCompleted() { require(!completed); _; }
 	modified hasWorker() { require(worker != address(0)); _; }
 	
-	event workorderPaidOut(uint amount, uint completedTime);
+	event workerPaidOut(uint amount, uint completedTime);
 	event workorderCanceled(uint amount, uint canceledTime);
 	event workerAdded(address worker, uint addedTime);
 
