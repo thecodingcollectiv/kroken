@@ -10,6 +10,10 @@ contract WorkOrder {
 	modifier onlyBy(address _account) { require(msg.sender == _account); _;	}
 	modifier notCompleted() { require(!completed); _; }
 	modified hasWorker() { require(worker != address(0)); _; }
+	
+	event workorderPaidOut(uint amount, uint completedTime);
+	event workorderCanceled(uint amount, uint canceledTime);
+	event workerAdded(address worker, uint addedTime);
 
 	function WorkOrder() public payable {
 		amount = msg.value;
@@ -19,15 +23,18 @@ contract WorkOrder {
 	
 	function addWorker(address workeraccount) public {
 		worker = workeraccount;
+		workerAdded(worker, now);
 	}
 	
 	function payoutWorker() public onlyBy(creator) notCompleted hasWorker {
 		completed = true;
+		workorderPaidOut(amount, now);
 		worker.transfer(amount);
 	}
 	
 	function cancel() public onlyBy(creator) notCompleted {
 		completed = true;
+		workorderCanceled(amount, now);
 		creator.transfer(amount);
 	}	
 }
