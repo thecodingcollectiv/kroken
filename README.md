@@ -13,3 +13,7 @@ The person creating the workorder is the creator.
 The creator can then add a worker to the wororder by calling addWorker(address workeraccount).
 
 The creator can then pay the worker and sent over the amount of way stored in the contract by calling payoutWorker(). OR cancel the workorder in which case the amount of wei stored in the contract is returned to the creator.
+
+Notes:
+After creating the workorder it can immediatly be canceled by the creator.
+After adding a worker, this worker can be overwritten by the creator with another simple by calling the addWorker method again with another address.
