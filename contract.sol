@@ -29,12 +29,12 @@ contract WorkOrder {
 	function payoutWorker() public onlyBy(creator) notCompleted hasWorker {
 		completed = true;
 		workerPaidOut(amount, now);
-		worker.transfer(amount); //there might be trouble here
+		worker.transfer(amount);
 	}
 	
 	function cancel() public onlyBy(creator) notCompleted {
 		completed = true;
 		workorderCanceled(amount, now);
-		creator.transfer(amount); //there might be trouble here
+		creator.transfer(amount);
 	}	
 }
