@@ -21,7 +21,7 @@ contract WorkOrder {
 		creationTime = now;
 	}
 	
-	function addWorker(address workeraccount) public {
+	function addWorker(address workeraccount) onlyBy(creator) notCompleted public {
 		worker = workeraccount;
 		workerAdded(worker, now);
 	}
